@@ -1,0 +1,158 @@
+
+SIMPLE TEST @ 1528229306
+
+Runtime (us):	0.000000
+CPU used:	-nan(ind)
+Phys. mem:	3506176
+Virt. mem:	3506176
+
+
+SIMPLE TEST @ 1528229392
+
+Runtime (us):	0.000000
+CPU used:	-nan(ind)
+Phys. mem:	3510272
+Virt. mem:	3510272
+
+
+SIMPLE TEST @ 1528229539
+
+Runtime (us):	11.337607
+CPU used:	-nan(ind)%
+Phys. mem:	3514368 KB
+Virt. mem:	3514368 KB
+
+
+SIMPLE TEST @ Tue Jun  5 16:21:30 2018
+
+
+Runtime (ns):	11.453029
+CPU used:	-nan(ind)%
+Phys. mem:	3502080 KB
+Virt. mem:	3502080 KB
+
+
+SIMPLE TEST @ Tue Jun  5 16:21:49 2018
+
+
+Runtime (ns):	11.230046
+CPU used:	-nan(ind)%
+Phys. mem:	3506176 KB
+Virt. mem:	3506176 KB
+
+
+SIMPLE TEST @ Tue Jun  5 16:26:11 2018
+
+
+Runtime (ns):	11.414620
+CPU used:	-nan(ind)%
+Phys. mem:	3 MB
+Virt. mem:	3 MB
+
+
+SIMPLE TEST @ Tue Jun  5 16:26:49 2018
+
+
+Runtime (ns):	11.219451
+CPU used:	-nan(ind)%
+Phys. mem:	3.502080 MB
+Virt. mem:	3.502080 MB
+
+
+SIMPLE TEST @ Wed Jun  6 12:00:53 2018
+
+
+Runtime (ns):	11.735070
+CPU used:	-nan(ind)%
+Phys. mem:	3.506176 MB
+Virt. mem:	3.506176 MB
+
+
+SIMPLE TEST @ Wed Jun  6 12:05:31 2018
+
+
+Runtime (ns):	11.463685
+CPU used:	-nan(ind)%
+Phys. mem:	3.502080 MB
+Virt. mem:	3.502080 MB
+
+
+SIMPLE TEST @ Wed Jun  6 12:39:51 2018
+
+
+Runtime (ns):	8.024889
+CPU used:	12%
+Phys. mem:	3.526656 MB
+Virt. mem:	3.526656 MB
+
+
+SIMPLE TEST @ Wed Jun  6 12:40:32 2018
+
+
+Runtime (ns):	2.122178
+CPU used:	12%
+Phys. mem:	3.530752 MB
+Virt. mem:	3.530752 MB
+
+
+SIMPLE TEST @ Wed Jun  6 12:42:09 2018
+
+
+Iterations:	100000000
+Runtime (ns):	21.218061
+CPU used:	12%
+Phys. mem:	3.526656 MB
+Virt. mem:	3.526656 MB
+
+
+CRYPTO TEST @ Fri Jun  8 14:42:50 2018
+
+
+Iterations:	5
+Runtime (ns):	7.212052
+CPU used:	12%
+Phys. mem:	5.672960 MB
+Virt. mem:	5.672960 MB
+
+
+ARRAYS TEST @ Mon Jun 11 15:17:55 2018
+
+
+Dim. Size:	100
+Runtime (ns):	13.688544
+	Time to fill (ns):	7.250874
+	Time to insert (ns):	1.144499
+CPU used:	7%
+Phys. mem:	34.750465 MB
+Virt. mem:	34.750465 MB
+
+
+RECURSIVE TEST @ Tue Jun 12 14:49:53 2018
+
+
+Rec. depth:	4000
+Runtime (ns):	0.000712
+CPU used:	-1%
+Phys. mem:	4.759552 MB
+Virt. mem:	4.759552 MB
+
+
+RECURSIVE TEST @ Tue Jun 12 15:24:36 2018
+
+
+Rec. depth:	100000
+Runtime (ns):	0.015718
+CPU used:	-1%
+Phys. mem:	34.467838 MB
+Virt. mem:	34.467838 MB
+
+
+COMPLEX MATHS TEST @ Wed Jun 13 15:09:06 2018
+
+
+Iterations:	1000000
+Runtime (ns):	4.242789
+CPU used:	12%
+Phys. mem:	3.915776 MB
+Virt. mem:	3.915776 MB
+
