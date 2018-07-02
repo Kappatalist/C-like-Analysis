@@ -1,12 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System;
 
 namespace C_Sharp
 {
     struct SimpleTelemetry
     {
         public double runtime;
-        public float phys_mem_usage;
-        public float virt_mem_usage;
+        public float mem_usage;
         public float cpu_usage;
     };
 
@@ -16,52 +15,46 @@ namespace C_Sharp
         public void RunSimple()
         {
             SimpleTelemetry telemetry;
-            UniversalTelemetry universal;
+            UniversalTelemetry universal = new UniversalTelemetry();
+
+            Random rng = new Random();
 
             int dummyValue;
 
             telemetry.cpu_usage = universal.cpuCounter.NextValue();
 
-            chrono::high_resolution_clock::time_point end_time;
-            chrono::high_resolution_clock::time_point start_time = universal.tick.now();
+            universal.tick.Start();
 
             for (int i = 0; i < ITERATIONS; i++)
             {
-                dummyValue = ((rand() % 999999) - (rand() % 999999)) * (rand() % 999999);
+                dummyValue = rng.Next(1000000) - rng.Next(1000000) * rng.Next(1000000);
             }
 
-            end_time = universal.tick.now();
+            universal.tick.Stop();
 
-            telemetry.phys_mem_usage = universal.getPhysicalMemUsedByProc();
-            telemetry.virt_mem_usage = universal.getVirtualMemUsedByProc();
-            telemetry.cpu_usage = cpu_usage.GetUsage();
+            telemetry.mem_usage = universal.ramCounter.NextValue();
+            telemetry.cpu_usage = universal.cpuCounter.NextValue();
+            telemetry.runtime = universal.tick.Elapsed.TotalSeconds;
 
-            telemetry.runtime = chrono::duration_cast<chrono::duration<double>>(end_time - start_time);
+            DateTime rightNow = DateTime.Now;
 
-
-    struct tm* currentTime;
-	time_t rightNow;
-
-    time(&rightNow);
-        currentTime = localtime(&rightNow);
-	
-
-	try
-	{
-		fileout.open("out.txt", fstream::app);
-		fileout << "\nSIMPLE TEST @ " + (string)asctime(currentTime);
-        fileout << "\n\nIterations:\t" + to_string(ITERATIONS);
-        fileout << "\nRuntime (ns):\t" + to_string(telemetry.runtime.count() * chrono::nanoseconds::period::num);
-		fileout << "\nCPU used:\t" + to_string(telemetry.cpu_usage);
-        fileout << "%\nPhys. mem:\t" + to_string(telemetry.phys_mem_usage / 1000000.0f) + " MB\nVirt. mem:\t" + to_string(telemetry.virt_mem_usage / 1000000.0f) + " MB\n\n";
-	}
-	catch (...)
-	{
-		cout << "Opening output file failed. Discarding results." << endl;
-	}
+            try
+            {
+                System.IO.StreamWriter fileout = new System.IO.StreamWriter("out.txt", true);
+                //fileout.open("out.txt", fstream::app);
+                fileout.Write("\nSIMPLE TEST @ " + rightNow.ToString());
+                fileout.Write("\n\nIterations:\t" + ITERATIONS.ToString());
+                fileout.Write("\nRuntime (ns):\t" + telemetry.runtime.ToString());
+                fileout.Write("\nCPU used:\t" + telemetry.cpu_usage.ToString());
+                fileout.Write("%\nMem used:\t" + (telemetry.mem_usage / 1000000.0).ToString() + " MB");
+            }
+            catch
+            {
+                Console.Write("Opening output file failed. Discarding results.\n");
+            }
         }
 
-        Simple(int iter)
+        public Simple(int iter)
         {
             ITERATIONS = iter;
         }

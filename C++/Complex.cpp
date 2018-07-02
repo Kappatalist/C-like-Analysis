@@ -53,8 +53,8 @@ void Complex::RunComplex()
 		sqrt(decirand());
 		cbrt(decirand());
 		hypot(decirand(), decirand());
-		erf(decirand());
-		erfc(decirand());
+		//erf(decirand());
+		//erfc(decirand());
 		tgamma(decirand());
 		lgamma(decirand());
 		lrint(decirand());
