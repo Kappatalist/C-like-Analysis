@@ -50,8 +50,8 @@ namespace C_Sharp
                                 int size;
                                 selection = Console.ReadLine();
                                 int.TryParse(selection, out size);
-                                //Arrays a(size);
-                                //a.RunArrays();
+                                Arrays a = new Arrays(size);
+                                a.RunArrays();
                                 break;
                             }
                         case "4":
@@ -63,8 +63,8 @@ namespace C_Sharp
                                 Console.Write("Key size? ");
                                 selection = Console.ReadLine();
                                 int.TryParse(selection, out size);
-                                //Crypto c(iterations, size);
-                                //c.RunCrypto();
+                                Crypto c = new Crypto(iterations, size);
+                                c.RunCrypto();
                                 break;
                             }
                         case "5":
@@ -73,8 +73,8 @@ namespace C_Sharp
                                 int depth;
                                 selection = Console.ReadLine();
                                 int.TryParse(selection, out depth);
-                                //Recursive r(depth);
-                                //r.RunRecursive();
+                                Recursive r = new Recursive(depth);
+                                r.RunRecursive();
                                 break;
                             }
                     }

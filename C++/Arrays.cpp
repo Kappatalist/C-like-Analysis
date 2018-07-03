@@ -95,7 +95,7 @@ void Arrays::RunArrays()
 
 	try
 	{
-		fileout.open("out.txt", fstream::app);
+		fileout.open("out -plus-.txt", fstream::app);
 		fileout << "\nARRAYS TEST @ " + (string)asctime(currentTime);
 		fileout << "\n\nDim. Size:\t" + to_string(ARR_SIZE);
 		fileout << "\nRuntime (ns):\t" + to_string(telemetry.total_runtime.count() * chrono::nanoseconds::period::num);

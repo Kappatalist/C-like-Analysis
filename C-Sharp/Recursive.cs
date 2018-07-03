@@ -2,33 +2,42 @@
 
 namespace C_Sharp
 {
-    struct SimpleTelemetry
+    struct RecursiveTelemetry
     {
         public double runtime;
         public float mem_usage;
         public float cpu_usage;
     };
 
-    class Simple
+    class Recursive
     {
-        private int ITERATIONS;
-        public void RunSimple()
+        ulong Recurse(ulong input, int ct, int realCt)
         {
-            SimpleTelemetry telemetry;
+            if (ct > 0) return Recurse(input *2, ct - 1, realCt);
+            else return RecurseMng(input *2, realCt - 10);
+        }
+
+        ulong RecurseMng(ulong input, int ct)
+        {
+            if (ct > 0) return Recurse(input *2, 10, ct);
+            else return input *2;
+        }
+
+        private int DEPTH;
+        public void RunRecursive()
+        {
+            RecursiveTelemetry telemetry;
             UniversalTelemetry universal = new UniversalTelemetry();
 
             Random rng = new Random();
 
-            int dummyValue;
+            ulong dummyValue = (ulong)rng.Next() % 10000;
 
             telemetry.cpu_usage = universal.cpuCounter.NextValue();
 
             universal.tick.Start();
 
-            for (int i = 0; i < ITERATIONS; i++)
-            {
-                dummyValue = rng.Next(1000000) - rng.Next(1000000) * rng.Next(1000000);
-            }
+            RecurseMng(dummyValue, DEPTH);
 
             universal.tick.Stop();
 
@@ -42,8 +51,8 @@ namespace C_Sharp
             {
                 System.IO.StreamWriter fileout = new System.IO.StreamWriter("out -sharp-.txt", true);
                 //fileout.open("out.txt", fstream::app);
-                fileout.Write("\nSIMPLE TEST @ " + rightNow.ToString());
-                fileout.Write("\n\nIterations:\t" + ITERATIONS.ToString());
+                fileout.Write("\nRECURSIVE TEST @ " + rightNow.ToString());
+                fileout.Write("\n\nRec. depth:\t" + DEPTH.ToString());
                 fileout.Write("\nRuntime (ns):\t" + telemetry.runtime.ToString());
                 fileout.Write("\nCPU used:\t" + telemetry.cpu_usage.ToString());
                 fileout.Write("%\nMem used:\t" + (telemetry.mem_usage / 1000000.0).ToString() + " MB");
@@ -54,9 +63,9 @@ namespace C_Sharp
             }
         }
 
-        public Simple(int iter)
+        public Recursive(int depth)
         {
-            ITERATIONS = iter;
+            DEPTH = depth;
         }
     }
 }

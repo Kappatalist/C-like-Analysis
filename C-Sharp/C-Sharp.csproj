@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arrays.cs" />
     <Compile Include="Complex.cs" />
+    <Compile Include="Crypto.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recursive.cs" />
     <Compile Include="Simple.cs" />
     <Compile Include="Universal.cs" />
   </ItemGroup>

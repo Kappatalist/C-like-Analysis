@@ -54,7 +54,7 @@ void Recursive::RunRecursive()
 
 	try
 	{
-		fileout.open("out.txt", fstream::app);
+		fileout.open("out -plus-.txt", fstream::app);
 		fileout << "\nRECURSIVE TEST @ " + (string)asctime(currentTime);
 		fileout << "\n\nRec. depth:\t" + to_string(DEPTH);
 		fileout << "\nRuntime (ns):\t" + to_string(telemetry.runtime.count() * chrono::nanoseconds::period::num);

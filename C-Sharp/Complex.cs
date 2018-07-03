@@ -71,7 +71,7 @@ namespace C_Sharp
 
             try
             {
-                System.IO.StreamWriter fileout = new System.IO.StreamWriter("out.txt", true);
+                System.IO.StreamWriter fileout = new System.IO.StreamWriter("out -sharp-.txt", true);
                 //fileout.open("out.txt", fstream::app);
                 fileout.Write("\nCOMPLEX TEST @ " + rightNow.ToString());
                 fileout.Write("\n\nIterations:\t" + ITERATIONS.ToString());

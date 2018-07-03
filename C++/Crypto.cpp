@@ -65,7 +65,7 @@ void Crypto::RunCrypto()
 
 	try
 	{
-		fileout.open("out.txt", fstream::app);
+		fileout.open("out -plus-.txt", fstream::app);
 		fileout << "\nCRYPTO TEST @ " + (string)asctime(currentTime);
 		fileout << "\n\nIterations:\t" + to_string(ITERATIONS);
 		fileout << "\nRuntime (ns):\t" + to_string(telemetry.runtime.count() * chrono::nanoseconds::period::num);
