@@ -26,7 +26,7 @@ int main()
 		printf("Your selection: ");
 		getline(selection, 1, stdin);
 
-		/// TODO: make sure this even works lol
+		/// TODO: make sure this even works
 		switch (strtol(selection))
 		{
 			case 1:

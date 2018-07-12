@@ -2,7 +2,6 @@
  * Crypto.c
  *
  *  Created on: Jul 11, 2018
- *      Author: Kappa
  */
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -15,46 +14,55 @@ void RunCrypto(int ITERATIONS, int KEY_SIZE)
 	char plain[512]; char cipher[512]; char recovered[512];
 	struct CryptoTelemetry telemetry;
 
-	/// TODO: Initialize crypto RNG and RSA function
-	//mRNG = new CryptoPP::AutoSeededRandomPool();
-	//mRSA = CryptoPP::InvertibleRSAFunction();
-
 	initializeCPUTelemetry();
 
-	time_t start_time, end_time;
-	time(start_time);
+	clock_t start = clock(), diff;
 
 	for (int i = 0; i < ITERATIONS; i++)
 	{
-		plain = "nv805435%H^H647h6896bb^$N64nn46$N^^U4b68myb64nbg";
-		cipher = "";
-		recovered = "";
+		strcpy(plain, "nv805435%H^H647h6896bb^$N64nn46$N^^U4b68myb64nbg");
+		strcpy(cipher, "");
+		strcpy(recovered, "");
 
-		/// TODO: iteration of RSA encryption into recovered text
+		cryptCreateContext(&mRSA, CRYPT_UNUSED, CRYPT_ALGO_RSA);
+		cryptSetAttribute(mRSA, CRYPT_CTXINFO_KEYSIZE, KEY_SIZE);
+		cryptGenerateKey(mRSA);
+		modulus = rand() * rand();
+		pubExp = rand();
+		privExp = rand() * rand();
+		cryptInitComponents(&mKey, CRYPT_KEYTYPE_PRIVATE);
+		cryptSetComponent((&mKey)->n, modulus, 1024);
+		cryptSetComponent((&mKey)->e, pubExp, 17);
+		cryptSetComponent((&mKey)->d, privExp, 1024);
+		cryptSetAttributeString(mRSA, CRYPT_CTXINFO_KEY_COMPONENTS, mKey, sizeof(CRYPT_PKCINFO_RSA));
+		strcpy(cipher, plain);
+		cryptEncrypt(mRSA, cipher, sizeof(cipher));
+		cryptDestroyComponents(&mKey);
 
-		/*mRSA.GenerateRandomWithKeySize(*mRNG, KEY_SIZE);
-		privateKey = CryptoPP::RSA::PrivateKey(mRSA);
-		publicKey = CryptoPP::RSA::PublicKey(mRSA);
-		rsaEncrypt = CryptoPP::RSAES_OAEP_SHA_Encryptor(publicKey);
-		rsaDecrypt = CryptoPP::RSAES_OAEP_SHA_Decryptor(privateKey);
-		ss1 = new CryptoPP::StringSource(plain, true,
-			new CryptoPP::PK_EncryptorFilter(*mRNG, rsaEncrypt,
-				new CryptoPP::StringSink(cipher)
-				) // PK_EncryptorFilter
-			); // StringSource
-		ss2 = new CryptoPP::StringSource(cipher, true,
-			new CryptoPP::PK_DecryptorFilter(*mRNG, rsaDecrypt,
-				new CryptoPP::StringSink(recovered)
-				) // PK_DecryptorFilter
-			); // StringSource*/
+		cryptSetAttributeString();
+
+		cryptInitComponents(&mKey, CRYPT_KEYTYPE_PUBLIC);
+		cryptSetComponent((&mKey)->n, modulus, 1024);
+		cryptSetComponent((&mKey)->e, pubExp, 17);
+		cryptSetComponent((&mKey)->d, privExp, 1024);
+		cryptSetAttributeString(mRSA, CRYPT_CTXINFO_KEY_COMPONENTS, mKey, sizeof(CRYPT_PKCINFO_RSA));
+		strcpy(recovered, cipher);
+		cryptDecrypt(mRSA, recovered, sizeof(recovered));
+		cryptDestroyComponents(&mKey);
+
+		cryptDestroyContext(mRSA);
+
+		if (cipher != recovered)
+		{
+			printf("WARNING: recovered text does not match original!");
+		}
 	}
 
-	time(end_time);
+	diff = clock() - start;
+	telemetry.runtime = (diff * 1000 / CLOCKS_PER_SEC);
 
 	telemetry.mem_usage = getPhysicalMemUsedByProc();
 	telemetry.cpu_usage = getCPUCurrentUsageByProc();
-
-	telemetry.runtime = end_time - start_time;
 
 	struct tm* currentTime;
 	time_t rightNow;
@@ -63,18 +71,33 @@ void RunCrypto(int ITERATIONS, int KEY_SIZE)
 
 	FILE *fileout;
 
+	char ITERATIONS_ch[128]; char KEY_SIZE_ch[128]; char runtime_ch[128]; char fill_ch[128]; char insert_ch[128]; char cpu_ch[128]; char mem_ch[128];
+	sprintf(ITERATIONS_ch, "%d", ITERATIONS);
+	sprintf(KEY_SIZE_ch, "%d", KEY_SIZE);
+	sprintf(runtime_ch, "%d", telemetry.runtime);
+	sprintf(cpu_ch, "%d", telemetry.cpu_usage);
+	sprintf(mem_ch, "%zu", telemetry.mem_usage);
+
+	char outline[512];
+
 	if ((fileout = fopen("out -c-.txt", "a+")) == NULL)
 	{
 		printf("Opening output file failed. Discarding results.");
 		exit(1);
 	}
 	else
-	{	/// TODO: touch up output
-		fputc("\nCRYPTO TEST @ " + (char[])asctime(currentTime), fileout);
-		fputc("\n\nIterations:\t" + itoa(ITERATIONS), fileout);
-		fputc("\n\nKey size:\t" + itoa(KEY_SIZE), fileout);
-		fputc("\nRuntime (ns):\t" + itoa(telemetry.runtime), fileout);
-		fputc("\nCPU used:\t" + itoa(telemetry.cpu_usage), fileout);
-		fputc("%\nPhys. mem:\t" + itoa(telemetry.mem_usage / 1000000.0f) + " MB\n\n", fileout);
+	{
+		sprintf(outline, "\nCRYPTO TEST @ %s", asctime(currentTime));
+		fputs(outline, fileout);
+		sprintf(outline, "\n\nIterations:\t%s", ITERATIONS_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "\n\nKey size:\t%s", KEY_SIZE_ch);
+		fputs(outline, fileout);
+		sprintf(outline,"\nTotal runtime (ns):\t%s", runtime_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "\nCPU used:\t%s", cpu_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "%%\nPhys. mem:\t%s bytes\n\n", mem_ch);
+		fputs(outline, fileout);
 	}
 }

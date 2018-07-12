@@ -20,8 +20,7 @@ void RunComplex(int ITERATIONS)
 
 	initializeCPUTelemetry();
 
-	time_t start_time, end_time;
-	time(start_time);
+	clock_t start = clock(), diff;
 
 	for (int i = 0; i < ITERATIONS; i++)
 	{
@@ -55,12 +54,11 @@ void RunComplex(int ITERATIONS)
 		fma(decirand(), decirand(), decirand());
 	}
 
-	time(end_time);
+	diff = clock() - start;
+	telemetry.runtime = (diff * 1000 / CLOCKS_PER_SEC);
 
 	telemetry.mem_usage = getPhysicalMemUsedByProc();
 	telemetry.cpu_usage = getCPUCurrentUsageByProc();
-
-	telemetry.runtime = end_time - start_time;
 
 	struct tm* currentTime;
 	time_t rightNow;
@@ -69,17 +67,30 @@ void RunComplex(int ITERATIONS)
 
 	FILE *fileout;
 
+	char ITERATIONS_ch[128]; char runtime_ch[128]; char fill_ch[128]; char insert_ch[128]; char cpu_ch[128]; char mem_ch[128];
+	sprintf(ITERATIONS_ch, "%d", ITERATIONS);
+	sprintf(runtime_ch, "%d", telemetry.runtime);
+	sprintf(cpu_ch, "%d", telemetry.cpu_usage);
+	sprintf(mem_ch, "%zu", telemetry.mem_usage);
+
+	char outline[512];
+
 	if ((fileout = fopen("out -c-.txt", "a+")) == NULL)
 	{
 		printf("Opening output file failed. Discarding results.");
 		exit(1);
 	}
 	else
-	{	/// TODO: touch up output
-		fputc("\nCOMPLEX MATHS TEST @ " + (char[])asctime(currentTime), fileout);
-		fputc("\n\nIterations:\t" + itoa(ITERATIONS), fileout);
-		fputc("\nRuntime (ns):\t" + itoa(telemetry.runtime), fileout);
-		fputc("\nCPU used:\t" + itoa(telemetry.cpu_usage), fileout);
-		fputc("%\nPhys. mem:\t" + itoa(telemetry.mem_usage / 1000000.0f) + " MB\n\n", fileout);
+	{
+		sprintf(outline, "\nCOMPLEX MATHS TEST @ %s", asctime(currentTime));
+		fputs(outline, fileout);
+		sprintf(outline, "\n\nIterations:\t%s", ITERATIONS_ch);
+		fputs(outline, fileout);
+		sprintf(outline,"\nTotal runtime (ns):\t%s", runtime_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "\nCPU used:\t%s", cpu_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "%%\nPhys. mem:\t%s bytes\n\n", mem_ch);
+		fputs(outline, fileout);
 	}
 }

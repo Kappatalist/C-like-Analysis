@@ -2,7 +2,6 @@
  * Universal.c
  *
  *  Created on: Jul 9, 2018
- *      Author: Kappa
  */
 
 #include "Universal.h"

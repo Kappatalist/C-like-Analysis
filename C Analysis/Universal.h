@@ -2,7 +2,6 @@
  * Universal.h
  *
  *  Created on: Jul 9, 2018
- *      Author: Kappa
  */
 
 #ifndef UNIVERSAL_H_

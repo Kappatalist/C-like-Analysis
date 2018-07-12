@@ -2,7 +2,6 @@
  * Simple.h
  *
  *  Created on: Jul 11, 2018
- *      Author: Kappa
  */
 
 #ifndef SIMPLE_H_
@@ -17,7 +16,7 @@
 
 struct SimpleTelemetry
 {
-	time_t runtime;
+	int runtime;
 	SIZE_T mem_usage;
 	short cpu_usage;
 };

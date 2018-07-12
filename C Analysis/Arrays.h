@@ -2,7 +2,6 @@
  * Arrays.h
  *
  *  Created on: Jul 11, 2018
- *      Author: Kappa
  */
 
 #ifndef ARRAYS_H_
@@ -16,13 +15,13 @@
 
 struct ArraysTelemetry
 {
-	time_t total_runtime;
-	time_t time_to_fill;
-	time_t time_to_insert;
+	int total_runtime;
+	int time_to_fill;
+	int time_to_insert;
 	SIZE_T mem_usage;
 	short cpu_usage;
 };
 
-Arrays(int ARR_SIZE);
+void RunArrays(int ARR_SIZE);
 
 #endif /* ARRAYS_H_ */

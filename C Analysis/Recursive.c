@@ -2,7 +2,6 @@
  * Recursive.c
  *
  *  Created on: Jul 11, 2018
- *      Author: Kappa
  */
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -30,17 +29,15 @@ void RunRecursive(int DEPTH)
 
 	initializeCPUTelemetry();
 
-	time_t start_time, end_time;
-	time(start_time);
+	clock_t start = clock(), diff;
 
 	RecurseMng(dummyValue, DEPTH);
 
-	time(end_time);
+	diff = clock() - start;
+	telemetry.runtime = (diff * 1000 / CLOCKS_PER_SEC);
 
 	telemetry.mem_usage = getPhysicalMemUsedByProc();
 	telemetry.cpu_usage = getCPUCurrentUsageByProc();
-
-	telemetry.runtime = end_time - start_time;
 
 	struct tm* currentTime;
 	time_t rightNow;
@@ -49,17 +46,30 @@ void RunRecursive(int DEPTH)
 
 	FILE *fileout;
 
+	char DEPTH_ch[128]; char runtime_ch[128]; char fill_ch[128]; char insert_ch[128]; char cpu_ch[128]; char mem_ch[128];
+	sprintf(DEPTH_ch, "%d", DEPTH);
+	sprintf(runtime_ch, "%d", telemetry.runtime);
+	sprintf(cpu_ch, "%d", telemetry.cpu_usage);
+	sprintf(mem_ch, "%zu", telemetry.mem_usage);
+
+	char outline[512];
+
 	if ((fileout = fopen("out -c-.txt", "a+")) == NULL)
 	{
 		printf("Opening output file failed. Discarding results.");
 		exit(1);
 	}
 	else
-	{	/// TODO: touch up output
-		fputc("\nRECURSIVE TEST @ " + (char[])asctime(currentTime), fileout);
-		fputc("\n\nRec. depth:\t" + itoa(DEPTH), fileout);
-		fputc("\nRuntime (ns):\t" + itoa(telemetry.runtime), fileout);
-		fputc("\nCPU used:\t" + itoa(telemetry.cpu_usage), fileout);
-		fputc("%\nPhys. mem:\t" + itoa(telemetry.mem_usage / 1000000.0f) + " MB\n\n", fileout);
+	{
+		sprintf(outline, "\nRECURSIVE TEST @ %s", asctime(currentTime));
+		fputs(outline, fileout);
+		sprintf(outline, "\n\nRec. depth:\t%s", DEPTH_ch);
+		fputs(outline, fileout);
+		sprintf(outline,"\nTotal runtime (ns):\t%s", runtime_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "\nCPU used:\t%s", cpu_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "%%\nPhys. mem:\t%s bytes\n\n", mem_ch);
+		fputs(outline, fileout);
 	}
 }

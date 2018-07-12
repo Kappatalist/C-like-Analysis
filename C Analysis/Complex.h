@@ -17,7 +17,7 @@
 
 struct ComplexTelemetry
 {
-	time_t runtime;
+	int runtime;
 	SIZE_T mem_usage;
 	short cpu_usage;
 };

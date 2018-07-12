@@ -2,12 +2,12 @@
  * Crypto.h
  *
  *  Created on: Jul 11, 2018
- *      Author: Kappa
  */
 
 #ifndef CRYPTO_H_
 #define CRYPTO_H_
 
+#include "cryptlib.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -16,12 +16,14 @@
 
 struct CryptoTelemetry
 {
-	time_t runtime;
+	int runtime;
 	SIZE_T mem_usage;
 	short cpu_usage;
 };
 
-/// TODO: implement libcrypto library (downloaded latest version already)
+CRYPT_CONTEXT mRSA;
+CRYPT_PKCINFO_RSA mKey;
+long int modulus, pubExp, privExp;
 
 void RunCrypto(int ITERATIONS, int KEY_SIZE);
 

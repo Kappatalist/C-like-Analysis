@@ -2,7 +2,6 @@
  * Arrays.c
  *
  *  Created on: Jul 11, 2018
- *      Author: Kappa
  */
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -22,8 +21,7 @@ void RunArrays(int ARR_SIZE)
 
 	initializeCPUTelemetry();
 
-	time_t start_time, end_time;
-	time(start_time);
+	clock_t start = clock(), diff;
 
 	printf("Initializing...\n");
 
@@ -39,8 +37,9 @@ void RunArrays(int ARR_SIZE)
 		}
 	}
 
-	time(end_time); telemetry.time_to_fill = end_time - start_time;
-	time(start_time);
+	diff = clock() - start;
+	telemetry.time_to_fill = diff * 1000 / CLOCKS_PER_SEC;
+	start = clock();
 
 	printf("Inserting...\n");
 
@@ -63,8 +62,9 @@ void RunArrays(int ARR_SIZE)
 		}
 	}
 
-	time(end_time); telemetry.time_to_insert = end_time - start_time;
-	time(start_time);
+	diff = clock() - start;
+	telemetry.time_to_insert = diff * 1000 / CLOCKS_PER_SEC;
+	start = clock();
 
 	printf("Emptying...\n");
 
@@ -74,17 +74,16 @@ void RunArrays(int ARR_SIZE)
 		{
 			for (int k = 0; k < ARR_SIZE*2; k++)
 			{
-				bigArray[i][j][k] = NULL;
+				bigArray[i][j][k] = 0;
 			}
 		}
 	}
 
-	time(end_time);
+	diff = clock() - start;
+	telemetry.total_runtime = (diff * 1000 / CLOCKS_PER_SEC) + telemetry.time_to_insert + telemetry.time_to_fill;
 
 	telemetry.mem_usage = getPhysicalMemUsedByProc();
 	telemetry.cpu_usage = getCPUCurrentUsageByProc();
-
-	telemetry.total_runtime = end_time - start_time;
 
 	struct tm* currentTime;
 	time_t rightNow;
@@ -93,17 +92,36 @@ void RunArrays(int ARR_SIZE)
 
 	FILE *fileout;
 
+	char ARR_SIZE_ch[128]; char runtime_ch[128]; char fill_ch[128]; char insert_ch[128]; char cpu_ch[128]; char mem_ch[128];
+	sprintf(ARR_SIZE_ch, "%d", ARR_SIZE);
+	sprintf(runtime_ch, "%d", telemetry.total_runtime);
+	sprintf(fill_ch, "%d", telemetry.time_to_fill);
+	sprintf(insert_ch, "%d", telemetry.time_to_insert);
+	sprintf(cpu_ch, "%d", telemetry.cpu_usage);
+	sprintf(mem_ch, "%zu", telemetry.mem_usage);
+
+	char outline[512];
+
 	if ((fileout = fopen("out -c-.txt", "a+")) == NULL)
 	{
 		printf("Opening output file failed. Discarding results.");
 		exit(1);
 	}
 	else
-	{	/// TODO: touch up output
-		fputc("\nARRAYS TEST @ " + (char[])asctime(currentTime), fileout);
-		fputc("\n\nIterations:\t" + itoa(ARR_SIZE), fileout);
-		fputc("\nRuntime (ns):\t" + itoa(telemetry.total_runtime), fileout);
-		fputc("\nCPU used:\t" + itoa(telemetry.cpu_usage), fileout);
-		fputc("%\nPhys. mem:\t" + itoa(telemetry.mem_usage / 1000000.0f) + " MB\n\n", fileout);
+	{
+		sprintf(outline, "\nARRAYS TEST @ %s", asctime(currentTime));
+		fputs(outline, fileout);
+		sprintf(outline, "\n\nArray size:\t%s", ARR_SIZE_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "\nTime to fill (ns):\t%s", fill_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "\nTime to insert (ns):\t%s", insert_ch);
+		fputs(outline, fileout);
+		sprintf(outline,"\nTotal runtime (ns):\t%s", runtime_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "\nCPU used:\t%s", cpu_ch);
+		fputs(outline, fileout);
+		sprintf(outline, "%%\nPhys. mem:\t%s bytes\n\n", mem_ch);
+		fputs(outline, fileout);
 	}
 }
