@@ -14,7 +14,8 @@ namespace C_Sharp
     {
         private int ITERATIONS;
         private Random rng = new Random();
-        private StatisticFormula stat;
+        private Chart stat = new Chart();
+        //private StatisticFormula stat = new StatisticFormula();
 
         private double decirand()
         {
@@ -23,11 +24,12 @@ namespace C_Sharp
 
         public void RunComplex()
         {
-            SimpleTelemetry telemetry;
+            ComplexTelemetry telemetry;
             UniversalTelemetry universal = new UniversalTelemetry();
 
             double val;
 
+            telemetry.mem_usage = universal.ramCounter.NextValue();
             telemetry.cpu_usage = universal.cpuCounter.NextValue();
 
             universal.tick.Start();
@@ -54,8 +56,8 @@ namespace C_Sharp
                 Math.Sqrt(Math.Pow(decirand(), 2) + Math.Pow(decirand(), 2));
                 //Math.Erf(decirand());
                 //erfc(decirand());
-                stat.GammaFunction(decirand());
-                Math.Log10(Math.Abs(stat.GammaFunction(decirand())));
+                stat.DataManipulator.Statistics.GammaFunction(decirand());
+                Math.Log10(Math.Abs(stat.DataManipulator.Statistics.GammaFunction(decirand())));
                 Math.Round(decirand());
                 Math.Abs(decirand() * -1);
                 val = (decirand() * decirand()) + decirand();
@@ -73,11 +75,12 @@ namespace C_Sharp
             {
                 System.IO.StreamWriter fileout = new System.IO.StreamWriter("out -sharp-.txt", true);
                 //fileout.open("out.txt", fstream::app);
-                fileout.Write("\nCOMPLEX TEST @ " + rightNow.ToString());
-                fileout.Write("\n\nIterations:\t" + ITERATIONS.ToString());
-                fileout.Write("\nRuntime (ns):\t" + telemetry.runtime.ToString());
-                fileout.Write("\nCPU used:\t" + telemetry.cpu_usage.ToString());
-                fileout.Write("%\nMem used:\t" + (telemetry.mem_usage / 1000000.0).ToString() + " MB");
+                fileout.WriteLine("\nCOMPLEX TEST @ " + rightNow.ToString());
+                fileout.WriteLine("\n\nIterations:\t" + ITERATIONS.ToString());
+                fileout.WriteLine("\nRuntime (ns):\t" + telemetry.runtime.ToString());
+                fileout.WriteLine("\nCPU used:\t" + telemetry.cpu_usage.ToString() + "%");
+                fileout.WriteLine("\nMem used:\t" + (telemetry.mem_usage / 1000000.0).ToString() + " MB");
+                fileout.Flush();
             }
             catch
             {

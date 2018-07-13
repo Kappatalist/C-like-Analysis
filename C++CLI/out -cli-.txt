@@ -1,0 +1,156 @@
+
+SIMPLE TEST @ 7/13/2018 2:40:56 PM
+
+
+Iterations:	100000
+
+Runtime (ns):	0.0031307
+
+CPU used:	4.580171%
+
+Mem used:	30.154752 MB
+
+COMPLEX TEST @ 7/13/2018 2:41:27 PM
+
+
+Iterations:	100000
+
+Runtime (ns):	5.9166936
+
+CPU used:	22.44119%
+
+Mem used:	44.920832 MB
+
+ARRAYS TEST @ 7/13/2018 2:41:52 PM
+
+Dim. size:	150
+Fill time (ns):	0.1592526
+Insert time (ns):	0.4272072
+Total Runtime (ns):	8.28E-05
+CPU used:	19.74516%
+Mem used:	114.44224 MB
+ARRAYS TEST @ 7/13/2018 2:43:21 PM
+
+
+Dim. size:	200
+
+Fill time (ns):	0.3410809
+
+Insert time (ns):	1.1023494
+
+Total Runtime (ns):	5.68E-05
+
+CPU used:	17.36292%
+
+Mem used:	228.610048 MB
+
+ARRAYS TEST @ 7/13/2018 2:44:01 PM
+
+
+Dim. size:	300
+
+Fill time (ns):	1.1647173
+
+Insert time (ns):	4.4816005
+
+Total Runtime (ns):	5.6463636
+
+CPU used:	17.50082%
+
+Mem used:	692.125696 MB
+
+CRYPTO TEST @ 7/13/2018 2:44:31 PM
+
+
+Iterations:	3
+
+Key size:	512
+
+Runtime (ns):	0.2608723
+
+CPU used:	2.699357%
+
+Mem used:	30.670848 MB
+
+CRYPTO TEST @ 7/13/2018 2:44:53 PM
+
+
+Iterations:	50
+
+Key size:	1024
+
+Runtime (ns):	0.0198447
+
+CPU used:	12.47156%
+
+Mem used:	30.908416 MB
+
+CRYPTO TEST @ 7/13/2018 2:45:15 PM
+
+
+Iterations:	1000
+
+Key size:	1024
+
+Runtime (ns):	0.2227029
+
+CPU used:	15.74301%
+
+Mem used:	34.144256 MB
+
+CRYPTO TEST @ 7/13/2018 2:47:37 PM
+
+
+Iterations:	100000
+
+Key size:	2048
+
+Runtime (ns):	126.7975612
+
+CPU used:	19.20832%
+
+Mem used:	30.457856 MB
+
+RECURSIVE TEST @ 7/13/2018 2:47:57 PM
+
+
+Rec. depth:	150
+
+Runtime (ns):	0.0005461
+
+CPU used:	0%
+
+Mem used:	29.949952 MB
+
+RECURSIVE TEST @ 7/13/2018 2:48:14 PM
+
+
+Rec. depth:	10000
+
+Runtime (ns):	0.0005952
+
+CPU used:	100%
+
+Mem used:	30.756864 MB
+
+RECURSIVE TEST @ 7/13/2018 2:48:30 PM
+
+
+Rec. depth:	40000
+
+Runtime (ns):	0.0016399
+
+CPU used:	32.09356%
+
+Mem used:	32.99328 MB
+
+RECURSIVE TEST @ 7/13/2018 2:48:47 PM
+
+
+Rec. depth:	1000000
+
+Runtime (ns):	0.052824
+
+CPU used:	25.05288%
+
+Mem used:	106.786816 MB

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace C_Sharp
 {
@@ -10,9 +11,24 @@ namespace C_Sharp
 
             //s.RunSimple();
 
+            //System.Diagnostics.PerformanceCounterCategory[] myCat2;
+            //// Retrieve the categories.
+            //myCat2 = System.Diagnostics.PerformanceCounterCategory.GetCategories();
+            //foreach (var i in myCat2)
+            //{
+                
+            //    if (i.CategoryName.StartsWith("Memo"))
+            //    {
+            //        Console.WriteLine(i.CategoryName);
+            //        foreach (var j in i.GetCounters()) Console.WriteLine(j.CounterName);
+            //        Console.WriteLine();
+            //    }
+                
+            //}
+
             string selection;
             bool goodBit = false;
-            Console.Write("C++ Analysis Test Module\n1) Many small operations\n2) Complex mathematical calculations\n3) Large array manipulation\n4) Cryptographic hashing\n5) Recursive operation\n");
+            Console.Write("C# Analysis Test Module\n1) Many small operations\n2) Complex mathematical calculations\n3) Large array manipulation\n4) Cryptographic hashing\n5) Recursive operation\n");
 
 
             while (!goodBit)
@@ -80,9 +96,13 @@ namespace C_Sharp
                     }
                     goodBit = true;
                 }
+                catch (System.Security.Cryptography.CryptographicException c)
+                {
+                    Console.Write(c.Message);
+                }
                 catch
                 {
-                    Console.Write("ERROR: Invalid selection. Type a number 1-6 to select a test module.\n");
+                    Console.Write("ERROR: Invalid selection. Type a number 1-5 to select a test module.\n");
                 }
             }
 

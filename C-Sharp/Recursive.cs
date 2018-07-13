@@ -33,6 +33,7 @@ namespace C_Sharp
 
             ulong dummyValue = (ulong)rng.Next() % 10000;
 
+            telemetry.mem_usage = universal.ramCounter.NextValue();
             telemetry.cpu_usage = universal.cpuCounter.NextValue();
 
             universal.tick.Start();
@@ -51,11 +52,12 @@ namespace C_Sharp
             {
                 System.IO.StreamWriter fileout = new System.IO.StreamWriter("out -sharp-.txt", true);
                 //fileout.open("out.txt", fstream::app);
-                fileout.Write("\nRECURSIVE TEST @ " + rightNow.ToString());
-                fileout.Write("\n\nRec. depth:\t" + DEPTH.ToString());
-                fileout.Write("\nRuntime (ns):\t" + telemetry.runtime.ToString());
-                fileout.Write("\nCPU used:\t" + telemetry.cpu_usage.ToString());
-                fileout.Write("%\nMem used:\t" + (telemetry.mem_usage / 1000000.0).ToString() + " MB");
+                fileout.WriteLine("\nRECURSIVE TEST @ " + rightNow.ToString());
+                fileout.WriteLine("\n\nRec. depth:\t" + DEPTH.ToString());
+                fileout.WriteLine("\nRuntime (ns):\t" + telemetry.runtime.ToString());
+                fileout.WriteLine("\nCPU used:\t" + telemetry.cpu_usage.ToString() + "%");
+                fileout.WriteLine("\nMem used:\t" + (telemetry.mem_usage / 1000000.0).ToString() + " MB");
+                fileout.Flush();
             }
             catch
             {

@@ -4,8 +4,9 @@ namespace C_Sharp
 {
     class UniversalTelemetry
     {
-        public Stopwatch tick;
+        private static Process p = Process.GetCurrentProcess();
+        public Stopwatch tick = new Stopwatch();
         public PerformanceCounter cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-        public PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+        public PerformanceCounter ramCounter = new PerformanceCounter("Process", "Working Set", p.ProcessName);
     }
 }

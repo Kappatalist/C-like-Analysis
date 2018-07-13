@@ -12,17 +12,9 @@ namespace C_Sharp
 
     class Crypto
     {
-        ///CryptoPP::InvertibleRSAFunction mRSA;
-        ///CryptoPP::AutoSeededRandomPool* mRNG;
         private string plain, recovered;
         private char[] chars;
         private byte[] bytes;
-        ///CryptoPP::RSA::PrivateKey privateKey;
-        ///CryptoPP::RSA::PublicKey publicKey;
-        ///CryptoPP::RSAES_OAEP_SHA_Encryptor rsaEncrypt;
-        ///CryptoPP::RSAES_OAEP_SHA_Decryptor rsaDecrypt;
-        ///CryptoPP::StringSource* ss1; // StringSource
-        ///CryptoPP::StringSource* ss2; // StringSource
         private RSACryptoServiceProvider mRSA;
 
         private int ITERATIONS;
@@ -33,34 +25,38 @@ namespace C_Sharp
             CryptoTelemetry telemetry;
             UniversalTelemetry universal = new UniversalTelemetry();
 
+            chars = new char[10000];
+            //bytes = new byte[10000];
             mRSA = new RSACryptoServiceProvider(KEY_SIZE);
             Random rng = new Random();
 
-            int dummyValue;
-
+            telemetry.mem_usage = universal.ramCounter.NextValue();
             telemetry.cpu_usage = universal.cpuCounter.NextValue();
 
             universal.tick.Start();
 
+            Console.WriteLine("Working...");
+
             for (int i = 0; i < ITERATIONS; i++)
             {
-                chars.Initialize();
-                bytes.Initialize();
                 plain = "nv805435%H^H647h6896bb^$N64nn46$N^^U4b68myb64nbg";
                 recovered = "";
+                if (bytes == null) bytes = new byte[plain.Length];
+                chars.Initialize();
+                bytes.Initialize();
                 chars = plain.ToCharArray();
-                for (int j = 0; j < chars.Length; i++)
+                for (int j = 0; j < chars.Length; j++)
                 {
                     bytes[j] = (byte)chars[j];
                 }
                 bytes = mRSA.Encrypt(bytes, false);
                 bytes = mRSA.Decrypt(bytes, false);
-                for (int j = 0; j < bytes.Length; i++)
+                for (int j = 0; j < bytes.Length; j++)
                 {
                     chars[j] = (char)bytes[j];
                 }
-                recovered = chars.ToString();
-                if (recovered != plain) throw new CryptographicException("Decrypted data does not match original.");
+                foreach (var c in chars) recovered += c;
+                if (recovered != plain) throw new CryptographicException("ERROR: Decrypted data does not match original.\n");
             }
 
             universal.tick.Stop();
@@ -75,12 +71,13 @@ namespace C_Sharp
             {
                 System.IO.StreamWriter fileout = new System.IO.StreamWriter("out -sharp-.txt", true);
                 //fileout.open("out.txt", fstream::app);
-                fileout.Write("\nCRYPTO TEST @ " + rightNow.ToString());
-                fileout.Write("\n\nIterations:\t" + ITERATIONS.ToString());
-                fileout.Write("\nKey size:\t" + KEY_SIZE.ToString());
-                fileout.Write("\nRuntime (ns):\t" + telemetry.runtime.ToString());
-                fileout.Write("\nCPU used:\t" + telemetry.cpu_usage.ToString());
-                fileout.Write("%\nMem used:\t" + (telemetry.mem_usage / 1000000.0).ToString() + " MB");
+                fileout.WriteLine("\nCRYPTO TEST @ " + rightNow.ToString());
+                fileout.WriteLine("\n\nIterations:\t" + ITERATIONS.ToString());
+                fileout.WriteLine("\nKey size:\t" + KEY_SIZE.ToString());
+                fileout.WriteLine("\nRuntime (ns):\t" + telemetry.runtime.ToString());
+                fileout.WriteLine("\nCPU used:\t" + telemetry.cpu_usage.ToString() + "%");
+                fileout.WriteLine("\nMem used:\t" + (telemetry.mem_usage / 1000000.0).ToString() + " MB");
+                fileout.Flush();
             }
             catch
             {
@@ -91,7 +88,8 @@ namespace C_Sharp
         public Crypto(int iter, int keysz)
         {
             ITERATIONS = iter;
-            KEY_SIZE = keysz;
+            if (keysz >= 512) KEY_SIZE = keysz;
+            else throw new CryptographicException("ERROR: Key size too low. Please use a key size of at least 512!!\n");
         }
     }
 }
