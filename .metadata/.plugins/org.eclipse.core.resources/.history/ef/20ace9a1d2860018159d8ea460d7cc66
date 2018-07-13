@@ -1,0 +1,101 @@
+import java.util.Random;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Vector;
+
+public class Arrays {
+	private double time_to_fill;
+	private double time_to_insert;
+	private double total_runtime;
+	private long mem_usage;
+	private double cpu_usage;
+
+	private int ARR_SIZE;
+	private Vector<Vector<Vector<Double>>> bigVector;
+
+	public Arrays(int arr_sz)
+	{
+		ARR_SIZE = arr_sz;
+	}
+
+	public void RunArrays()
+	{
+		Universal universal = new Universal();
+
+		double dummyValue;
+		Random RNG = new Random();
+
+		long start_time = System.nanoTime();
+
+		System.out.println("Populating vector...");
+
+        for (int i = 0; i < ARR_SIZE; i++)
+        {
+            for (int j = 0; j < ARR_SIZE; j++)
+            {
+                for (int k = 0; k < ARR_SIZE; k++)
+                {
+                    dummyValue = (RNG.nextInt(1000000) - RNG.nextInt(1000000) * RNG.nextDouble());
+                    bigVector.elementAt(i).elementAt(j).add(dummyValue);
+                }
+            }
+        }
+
+        long end_time = System.nanoTime();
+        time_to_fill = end_time - start_time;
+        start_time = System.nanoTime();
+
+        System.out.println("Inserting to vector...");
+
+        for (int i = 0; i < ARR_SIZE; i++)
+        {
+            for (int j = 0; j < ARR_SIZE; j++)
+            {
+                for (int k = 0; k < ARR_SIZE; k++)
+                {
+                	dummyValue = (RNG.nextInt(1000000) - RNG.nextInt(1000000) * RNG.nextInt(1000000));
+                	bigVector.elementAt(i).elementAt(j).add(bigVector.size() / 2, dummyValue);
+                }
+            }
+        }
+
+        end_time = System.nanoTime();
+        time_to_insert = end_time - start_time;
+        start_time = System.nanoTime();
+
+        System.out.println("Clearing vector...");
+
+        bigVector.clear();
+
+		end_time = System.nanoTime();
+
+		mem_usage = universal.performanceCounter.getCommittedVirtualMemorySize();
+		cpu_usage = universal.performanceCounter.getProcessCpuLoad() * 100;
+		total_runtime = (end_time - start_time) + time_to_fill + time_to_insert;
+
+		Calendar mCal = Calendar.getInstance();
+		SimpleDateFormat mSDF = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+		String rightNow = mSDF.format(mCal.getTime());
+		
+		try
+		{
+			BufferedWriter fileout = new BufferedWriter(new FileWriter("out -java-.txt", true));
+			
+			fileout.write("\nARRAYS TEST @ " + rightNow);											fileout.newLine();
+			fileout.write("\n\nIterations:\t" + String.valueOf(ARR_SIZE));							fileout.newLine();
+			fileout.write("\nTime to fill (ns):\t" + String.valueOf(time_to_fill / 1000000));		fileout.newLine();
+			fileout.write("\nTime to insert (ns):\t" + String.valueOf(time_to_insert / 1000000));	fileout.newLine();
+			fileout.write("\nTotal runtime (ns):\t" + String.valueOf(total_runtime / 1000000));		fileout.newLine();
+			fileout.write("\nCPU used:\t" + String.valueOf(cpu_usage));								fileout.newLine();
+			fileout.write("%\nPhys. mem:\t" + String.valueOf(mem_usage / 1000000.0f) + " MB\n\n");	fileout.newLine();
+			
+			fileout.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Opening output file failed. Discarding results.");
+		}
+	}
+}

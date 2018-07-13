@@ -43,8 +43,8 @@ public class Recursive {
 		long end_time = System.nanoTime();
 
 		mem_usage = universal.performanceCounter.getCommittedVirtualMemorySize();
-		cpu_usage = universal.performanceCounter.getProcessCpuLoad();
-		runtime = end_time - start_time;
+		cpu_usage = universal.performanceCounter.getProcessCpuLoad() * 100;
+		runtime = (end_time - start_time) / 1000;
 
 		Calendar mCal = Calendar.getInstance();
 		SimpleDateFormat mSDF = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
@@ -52,13 +52,13 @@ public class Recursive {
 		
 		try
 		{
-			BufferedWriter fileout = new BufferedWriter(new FileWriter("out -java-.txt"));
+			BufferedWriter fileout = new BufferedWriter(new FileWriter("out -java-.txt", true));
 			
-			fileout.write("\nRECURSIVE TEST @ " + rightNow);
-			fileout.write("\n\nRec. depth:\t" + String.valueOf(DEPTH));
-			fileout.write("\nRuntime (ns):\t" + String.valueOf(runtime / 1000000));
-			fileout.write("\nCPU used:\t" + String.valueOf(cpu_usage));
-			fileout.write("%\nPhys. mem:\t" + String.valueOf(mem_usage / 1000000.0f) + " MB\n\n");
+			fileout.write("\nRECURSIVE TEST @ " + rightNow);										fileout.newLine();
+			fileout.write("\n\nRec. depth:\t" + String.valueOf(DEPTH));								fileout.newLine();
+			fileout.write("\nRuntime (ns):\t" + String.valueOf(runtime / 1000000));					fileout.newLine();
+			fileout.write("\nCPU used:\t" + String.valueOf(cpu_usage) + "%");						fileout.newLine();
+			fileout.write("\nPhys. mem:\t" + String.valueOf(mem_usage / 1000000.0f) + " MB\n\n");	fileout.newLine();
 			
 			fileout.close();
 		}

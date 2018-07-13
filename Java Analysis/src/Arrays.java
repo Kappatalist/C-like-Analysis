@@ -18,6 +18,13 @@ public class Arrays {
 	public Arrays(int arr_sz)
 	{
 		ARR_SIZE = arr_sz;
+		
+		bigVector = new Vector<Vector<Vector<Double>>>();
+		for (int i = 0; i < ARR_SIZE; i++) bigVector.add(new Vector<Vector<Double>>(ARR_SIZE));
+        for (Vector<Vector<Double>> vec : bigVector)
+        {
+            for (int j = 0; j < ARR_SIZE; j++) vec.add(new Vector<Double>(ARR_SIZE));
+        }
 	}
 
 	public void RunArrays()
@@ -44,7 +51,7 @@ public class Arrays {
         }
 
         long end_time = System.nanoTime();
-        time_to_fill = end_time - start_time;
+        time_to_fill = (end_time - start_time) / 1000;
         start_time = System.nanoTime();
 
         System.out.println("Inserting to vector...");
@@ -62,7 +69,7 @@ public class Arrays {
         }
 
         end_time = System.nanoTime();
-        time_to_insert = end_time - start_time;
+        time_to_insert = (end_time - start_time) / 1000;
         start_time = System.nanoTime();
 
         System.out.println("Clearing vector...");
@@ -72,8 +79,8 @@ public class Arrays {
 		end_time = System.nanoTime();
 
 		mem_usage = universal.performanceCounter.getCommittedVirtualMemorySize();
-		cpu_usage = universal.performanceCounter.getProcessCpuLoad();
-		total_runtime = (end_time - start_time) + time_to_fill + time_to_insert;
+		cpu_usage = universal.performanceCounter.getProcessCpuLoad() * 100;
+		total_runtime = ((end_time - start_time) / 1000) + time_to_fill + time_to_insert;
 
 		Calendar mCal = Calendar.getInstance();
 		SimpleDateFormat mSDF = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
@@ -81,15 +88,15 @@ public class Arrays {
 		
 		try
 		{
-			BufferedWriter fileout = new BufferedWriter(new FileWriter("out -java-.txt"));
+			BufferedWriter fileout = new BufferedWriter(new FileWriter("out -java-.txt", true));
 			
-			fileout.write("\nARRAYS TEST @ " + rightNow);
-			fileout.write("\n\nIterations:\t" + String.valueOf(ARR_SIZE));
-			fileout.write("\nTime to fill (ns):\t" + String.valueOf(time_to_fill / 1000000));
-			fileout.write("\nTime to insert (ns):\t" + String.valueOf(time_to_insert / 1000000));
-			fileout.write("\nTotal runtime (ns):\t" + String.valueOf(total_runtime / 1000000));
-			fileout.write("\nCPU used:\t" + String.valueOf(cpu_usage));
-			fileout.write("%\nPhys. mem:\t" + String.valueOf(mem_usage / 1000000.0f) + " MB\n\n");
+			fileout.write("\nARRAYS TEST @ " + rightNow);											fileout.newLine();
+			fileout.write("\n\nArr. dims:\t" + String.valueOf(ARR_SIZE));							fileout.newLine();
+			fileout.write("\nTime to fill (ns):\t" + String.valueOf(time_to_fill / 1000000));		fileout.newLine();
+			fileout.write("\nTime to insert (ns):\t" + String.valueOf(time_to_insert / 1000000));	fileout.newLine();
+			fileout.write("\nTotal runtime (ns):\t" + String.valueOf(total_runtime / 1000000));		fileout.newLine();
+			fileout.write("\nCPU used:\t" + String.valueOf(cpu_usage) + "%");						fileout.newLine();
+			fileout.write("\nPhys. mem:\t" + String.valueOf(mem_usage / 1000000.0f) + " MB\n\n");	fileout.newLine();
 			
 			fileout.close();
 		}
