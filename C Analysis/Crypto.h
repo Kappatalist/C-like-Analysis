@@ -7,7 +7,7 @@
 #ifndef CRYPTO_H_
 #define CRYPTO_H_
 
-#include "cryptlib.h"
+#include "cl344/cryptlib.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>

@@ -14,6 +14,8 @@ void RunCrypto(int ITERATIONS, int KEY_SIZE)
 	char plain[512]; char cipher[512]; char recovered[512];
 	struct CryptoTelemetry telemetry;
 
+	//HINSTANCE clDLL = LoadLibrary("cl32.dll");
+
 	initializeCPUTelemetry();
 
 	clock_t start = clock(), diff;

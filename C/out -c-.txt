@@ -1,0 +1,387 @@
+
+SIMPLE TEST @ Fri Jul 13 20:19:44 2018
+
+
+Iterations:	100000
+Total runtime (ns):	7
+CPU used:	0.000000%
+Phys. mem:	4845568 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 20:20:23 2018
+
+
+Iterations:	100000000
+Total runtime (ns):	7212
+CPU used:	0.000000%
+Phys. mem:	4820992 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 20:24:42 2018
+
+
+Iterations:	100000
+Total runtime (ns):	0.007000
+CPU used:	0.000000%
+Phys. mem:	4853760 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:01:39 2018
+
+
+Iterations:	1111
+Total runtime (ns):	0.000000
+CPU used:	inf%
+Phys. mem:	4829184 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:02:17 2018
+
+
+Iterations:	10000000
+Total runtime (ns):	0.707000
+CPU used:	355600.212164%
+Phys. mem:	4857856 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:02:55 2018
+
+
+Iterations:	11111111
+Total runtime (ns):	0.787000
+CPU used:	352080402.795426%
+Phys. mem:	4812800 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:05:25 2018
+
+
+Iterations:	100000
+Total runtime (ns):	0.008000
+CPU used:	86.197312%
+Phys. mem:	4816896 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:17:07 2018
+
+
+Iterations:	10000000
+Total runtime (ns):	0.720000
+CPU used:	3179684727008943.500000%
+Phys. mem:	4820992 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:17:34 2018
+
+
+Iterations:	10000000
+Total runtime (ns):	0.717000
+CPU used:	3192988847144032.500000%
+Phys. mem:	4833280 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:26:08 2018
+
+
+Iterations:	10000
+Total runtime (ns):	0.001000
+CPU used:	228937300275565.718750%
+Phys. mem:	4853760 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:32:47 2018
+
+
+Iterations:	100000
+Total runtime (ns):	0.006000
+CPU used:	0.333333%
+Phys. mem:	4853760 bytes
+
+
+SIMPLE TEST @ Fri Jul 13 21:34:01 2018
+
+
+Iterations:	100000
+Total runtime (ns):	0.007000
+CPU used:	0.000000%
+Phys. mem:	4829184 bytes
+
+
+SIMPLE TEST @ Sat Jul 14 14:35:37 2018
+
+
+Iterations:	1000000
+Total runtime (ns):	0.107000
+CPU used:	5.140187%
+Phys. mem:	4829184 bytes
+
+
+SIMPLE TEST @ Sat Jul 14 14:36:26 2018
+
+
+Iterations:	10000000
+Total runtime (ns):	0.698000
+CPU used:	1.577364%
+Phys. mem:	4845568 bytes
+
+
+SIMPLE TEST @ Sat Jul 14 15:07:07 2018
+
+
+Iterations:	10000000
+Total runtime (ns):	0.692000
+CPU used:	0.541908%
+Phys. mem:	4849664 bytes
+
+
+COMPLEX MATHS TEST @ Sat Jul 14 15:07:29 2018
+
+
+Iterations:	1000000
+Total runtime (ns):	1.767000
+CPU used:	0.024901%
+Phys. mem:	4923392 bytes
+
+
+COMPLEX MATHS TEST @ Sat Jul 14 15:08:51 2018
+
+
+Iterations:	10000000
+Total runtime (ns):	17.259000
+CPU used:	0.000022%
+Phys. mem:	4947968 bytes
+
+
+COMPLEX MATHS TEST @ Sat Jul 14 15:09:50 2018
+
+
+Iterations:	10000000
+Total runtime (ns):	17.240000
+CPU used:	21.461717%
+Phys. mem:	4952064 bytes
+
+
+CRYPTO TEST @ Sat Jul 14 15:10:15 2018
+
+
+Iterations:	1000
+
+Key size:	1024
+Total runtime (ns):	0.124000
+CPU used:	-4572.580645%
+Phys. mem:	4870144 bytes
+
+
+RECURSIVE TEST @ Sat Jul 14 15:10:53 2018
+
+
+Rec. depth:	4000
+Total runtime (ns):	0.000000
+CPU used:	inf%
+Phys. mem:	4833280 bytes
+
+
+RECURSIVE TEST @ Sat Jul 14 15:11:22 2018
+
+
+Rec. depth:	100000
+Total runtime (ns):	0.001000
+CPU used:	-567000.000000%
+Phys. mem:	5222400 bytes
+
+
+RECURSIVE TEST @ Sat Jul 14 15:13:01 2018
+
+
+Rec. depth:	1000000
+Total runtime (ns):	0.004000
+CPU used:	-227000.000000%
+Phys. mem:	8843264 bytes
+
+
+RECURSIVE TEST @ Sat Jul 14 15:13:47 2018
+
+
+Rec. depth:	5000000
+Total runtime (ns):	0.019000
+CPU used:	-33052.631579%
+Phys. mem:	24817664 bytes
+
+
+RECURSIVE TEST @ Sat Jul 14 15:14:07 2018
+
+
+Rec. depth:	10000000
+Total runtime (ns):	0.045000
+CPU used:	6133.333333%
+Phys. mem:	44818432 bytes
+
+
+RECURSIVE TEST @ Sat Jul 14 15:15:14 2018
+
+
+Rec. depth:	100000000
+Total runtime (ns):	0.448000
+CPU used:	819.196429%
+Phys. mem:	404791296 bytes
+
+
+ARRAYS TEST @ Sat Jul 14 15:16:37 2018
+
+
+Array size:	100
+Time to fill (ns):	10514000.000000
+Time to insert (ns):	4896000.000000
+Total runtime (ns):	15410002.472000
+CPU used:	-0.000010%
+Phys. mem:	68816896 bytes
+
+
+ARRAYS TEST @ Sat Jul 14 15:19:30 2018
+
+
+Array size:	100
+Time to fill (ns):	77000.000000
+Time to insert (ns):	155000.000000
+Total runtime (ns):	232000.000000
+CPU used:	0.000491%
+Phys. mem:	260812800 bytes
+
+
+ARRAYS TEST @ Sat Jul 14 15:20:44 2018
+
+
+Array size:	200
+Time to fill (ns):	0.614000
+Time to insert (ns):	1.739000
+Total runtime (ns):	2.353000
+CPU used:	-37.399065%
+Phys. mem:	260808704 bytes
+
+
+ARRAYS TEST @ Sat Jul 14 15:21:06 2018
+
+
+Array size:	200
+Time to fill (ns):	0.613000
+Time to insert (ns):	1.737000
+Total runtime (ns):	2.350000
+CPU used:	-221.702128%
+Phys. mem:	260829184 bytes
+
+
+SIMPLE TEST @ Sat Jul 14 17:53:54 2018
+
+
+Iterations:	100000
+Total runtime (ns):	0.021000
+CPU used:	-22380.952381%
+Phys. mem:	5390336 bytes
+
+
+ARRAYS TEST @ Sat Jul 14 17:56:48 2018
+
+
+Array size:	200
+Time to fill (ns):	1.688000
+Time to insert (ns):	7.923000
+Total runtime (ns):	9.743000
+CPU used:	-20.117007%
+Phys. mem:	261353472 bytes
+
+
+CRYPTO TEST @ Sat Jul 14 18:45:24 2018
+
+
+Iterations:	1
+Key size:	1024
+Total runtime (ns):	154.661000
+CPU used:	0.290959%
+Phys. mem:	4886528 bytes
+
+
+ARRAYS TEST @ Sun Jul 15 14:03:33 2018
+
+
+Array size:	2
+Time to fill (ns):	71.977000
+Time to insert (ns):	11.011000
+Total runtime (ns):	92.944000
+CPU used:	4.604923%
+Phys. mem:	4829184 bytes
+
+
+ARRAYS TEST @ Sun Jul 15 16:10:57 2018
+
+
+Array size:	300
+Time to fill (ns):	2.064000
+Time to insert (ns):	2.130000
+Total runtime (ns):	4.203000
+CPU used:	15.940995%
+Phys. mem:	4882432 bytes
+
+
+ARRAYS TEST @ Sun Jul 15 16:15:49 2018
+
+
+Array size:	200
+Time to fill (ns):	0.618000
+Time to insert (ns):	0.624000
+Total runtime (ns):	1.244000
+CPU used:	-85.209003%
+Phys. mem:	4857856 bytes
+
+
+ARRAYS TEST @ Sun Jul 15 16:20:50 2018
+
+
+Array size:	50
+Time to fill (ns):	3.888000
+Time to insert (ns):	0.010000
+Total runtime (ns):	3.898000
+CPU used:	102.616727%
+Phys. mem:	5328896 bytes
+
+
+ARRAYS TEST @ Sun Jul 15 16:23:58 2018
+
+
+Array size:	3
+Time to fill (ns):	0.000000
+Time to insert (ns):	0.000000
+Total runtime (ns):	0.000000
+CPU used:	inf%
+Phys. mem:	4866048 bytes
+
+
+ARRAYS TEST @ Sun Jul 15 16:25:57 2018
+
+
+Array size:	200
+Time to fill (ns):	0.629000
+Time to insert (ns):	0.650000
+Total runtime (ns):	1.285000
+CPU used:	-416.342412%
+Phys. mem:	4833280 bytes
+
+
+CRYPTO TEST @ Tue Jul 17 18:24:36 2018
+
+
+Iterations:	1
+Key size:	1024
+Total runtime (ns):	0.000000
+CPU used:	-inf%
+Phys. mem:	4894720 bytes
+
+
+CRYPTO TEST @ Tue Jul 17 18:27:40 2018
+
+
+Iterations:	100
+Key size:	1024
+Total runtime (ns):	0.000000
+CPU used:	inf%
+Phys. mem:	5386240 bytes
+
