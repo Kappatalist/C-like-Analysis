@@ -18,7 +18,7 @@ static int numProcessors;
 static HANDLE self;
 
 PULONG64 cycleStart, cycleEnd;
-LONG64 cycle_long;
+ULONG64 cycle_long;
 
 LPSYSTEM_INFO systemInfo;
 

@@ -64,7 +64,7 @@ void RunComplex(int ITERATIONS)
 	cycle_long = cycleEnd - cycleStart;
 
 	telemetry.mem_usage = getPhysicalMemUsedByProc();
-	telemetry.cpu_usage = (cycle_long / systemInfo->dwNumberOfProcessors / (telemetry.runtime));
+	telemetry.cpu_usage = ((cycle_long / systemInfo->dwNumberOfProcessors) / telemetry.runtime);
 
 	struct tm* currentTime = malloc(sizeof(struct tm*));
 	time_t*const rightNow = malloc(sizeof(time_t*));

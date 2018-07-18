@@ -385,3 +385,73 @@ Total runtime (ns):	0.000000
 CPU used:	inf%
 Phys. mem:	5386240 bytes
 
+
+CRYPTO TEST @ Wed Jul 18 16:13:22 2018
+
+
+Iterations:	1
+Key size:	1024
+Total runtime (ns):	56.349000
+CPU used:	-0.763101%
+Phys. mem:	6270976 bytes
+
+
+CRYPTO TEST @ Wed Jul 18 16:20:38 2018
+
+
+Iterations:	100
+Key size:	1024
+Total runtime (ns):	10.682000
+CPU used:	-71.147725%
+Phys. mem:	6197248 bytes
+
+
+CRYPTO TEST @ Wed Jul 18 16:24:27 2018
+
+
+Iterations:	100
+Key size:	1024
+Total runtime (ns):	9.874000
+CPU used:	0.000202%
+Phys. mem:	6189056 bytes
+
+
+CRYPTO TEST @ Wed Jul 18 16:27:58 2018
+
+
+Iterations:	100
+Key size:	1024
+Total runtime (ns):	9.272000
+CPU used:	0.402151%
+Phys. mem:	6258688 bytes
+
+
+CRYPTO TEST @ Wed Jul 18 16:29:33 2018
+
+
+Iterations:	1
+Key size:	1024
+Total runtime (ns):	0.048000
+CPU used:	0.001740%
+Phys. mem:	6221824 bytes
+
+
+CRYPTO TEST @ Wed Jul 18 16:30:33 2018
+
+
+Iterations:	100
+Key size:	1024
+Total runtime (ns):	10.118000
+CPU used:	-0.175904%
+Phys. mem:	6242304 bytes
+
+
+CRYPTO TEST @ Wed Jul 18 16:35:25 2018
+
+
+Iterations:	100
+Key size:	1024
+Total runtime (ns):	10.334000
+CPU used:	31.643120%
+Phys. mem:	6230016 bytes
+

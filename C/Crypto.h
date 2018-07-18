@@ -28,7 +28,7 @@ struct CryptoTelemetry
 //HCRYPTKEY* mKey;
 //RSAPUBKEY mKey2;
 
-CRYPT_CONTEXT mRSA;
+CRYPT_CONTEXT* mRSA;
 CRYPT_PKCINFO_RSA* mPrivKey;
 CRYPT_PKCINFO_RSA* mPubKey;
 long int modulus, pubExp, privExp;
